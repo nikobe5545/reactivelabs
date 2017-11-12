@@ -7,4 +7,4 @@ It has to be a capped collection so it can be tailable. It also needs at least o
 Can be setup like this in the command line:
 
 `db.createCollection('customer', {capped:true, size: 10000})`
-`db.customer.insert({"type":"init"})`
+and then `db.customer.insert({"type":"init"})`
