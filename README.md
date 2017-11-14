@@ -9,6 +9,13 @@ To try out the websocket:
 2. Run the application
 3. Open http://localhost:8080/websocket.html
 4. POST a new customer to http://localhost:8080/rest/customer
+```javascript
+{
+	"firstName": "Olle",
+	"lastName": "Ollesson",
+	"email": "olle.ollesson@gmail.com"
+}
+```
 5. Verify that the newly posted customer appears in the table on the websocket page.
 
 # MongoDB details
