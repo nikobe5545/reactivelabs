@@ -23,11 +23,11 @@ A database named reactivelabs with a collection named "customer" is needed. Conf
 
 `docker run -d -p 27017:27017 -p 28017:28017 -e MONGODB_USER="reactivelabs" -e MONGODB_DATABASE="reactivelabs" -e MONGODB_PASS="reactivelabs" tutum/mongodb`
 
-Set up the user:
+Set up the user in the mongo shell:
 `db.grantRolesToUser( "reactivelabs", [ { role: "readWrite", db: "reactivelabs" } ] )`
 
 The collection needs to be capped so it can be tailed. It also needs one initial document to work with the tail query.
-Can be setup like this in the MongoDB command line:
+Can be setup like this in the MongoDB shell:
 
 `db.createCollection('customer', {capped:true, size: 10000})`
 
