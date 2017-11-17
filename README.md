@@ -33,7 +33,7 @@ Get the container id and add to the below command
 
 Open MongoDB shell:
 
-`mongo reactivelabs -u admin -p reactivelabs`
+`mongo reactivelabs -u reactivelabs -p reactivelabs`
 
 Set up the user in the mongo shell:
 
