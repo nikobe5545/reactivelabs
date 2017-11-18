@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Websocket</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.3.0/milligram.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.3.0/milligram.min.css.map">
+</head>
+<body>
+<main class="wrapper">
+    <div id="output">
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Email</th>
+        </tr>
+        </thead>
+        <tbody id="daBody">
+        </tbody>
+    </table>
+</main>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        if (!("WebSocket" in window)) WebSocket = MozWebSocket;
+        const socket = new WebSocket("ws://localhost:8080/stream/addNewCustomer");
+
+        socket.onopen = function (event) {
+
+            socket.onmessage = function (e) {
+                const data = JSON.parse(e.data);
+                let idTd = document.createElement('td');
+                idTd.textContent = data.id;
+
+                let firstNameTd = document.createElement('td');
+                firstNameTd.textContent = data.firstName;
+
+                let lastNameTd = document.createElement('td');
+                lastNameTd.textContent = data.lastName;
+
+                let emailTd = document.createElement('td');
+                emailTd.textContent = data.email;
+
+                let newTr = document.createElement('tr');
+                newTr.appendChild(idTd);
+                newTr.appendChild(firstNameTd);
+                newTr.appendChild(lastNameTd);
+                newTr.appendChild(emailTd);
+
+                document.getElementById('daBody').appendChild(newTr);
+            }
+        }
+    });
+</script>
+</body>
+</html>

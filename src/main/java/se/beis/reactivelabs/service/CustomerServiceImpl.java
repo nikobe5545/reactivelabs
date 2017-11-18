@@ -1,5 +1,8 @@
 package se.beis.reactivelabs.service;
 
+import org.springframework.integration.channel.PublishSubscribeChannel;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.MessageHeaders;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -13,6 +16,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Resource
     private CustomerRepository customerRepository;
+
+    @Resource
+    private PublishSubscribeChannel incomingCustomersChannel;
 
     @Override
     public Flux<Customer> getAllCustomers() {
@@ -38,6 +44,17 @@ public class CustomerServiceImpl implements CustomerService {
     public void addNewCustomer(Customer customer) {
         Mono<Customer> customerMono = customerRepository.save(customer);
         customerMono.block();
+        incomingCustomersChannel.send(new Message<Customer>() {
+            @Override
+            public Customer getPayload() {
+                return customer;
+            }
+
+            @Override
+            public MessageHeaders getHeaders() {
+                return null;
+            }
+        });
     }
 
     @Override

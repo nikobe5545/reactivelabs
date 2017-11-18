@@ -16,14 +16,14 @@ public class CustomerWebSocketHandler implements WebSocketHandler {
 
     private CustomerRepository customerRepository;
 
+    ObjectMapper objectMapper = new ObjectMapper();
+
     public CustomerWebSocketHandler(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
 
     @Override
     public Mono<Void> handle(WebSocketSession session) {
-        ObjectMapper objectMapper = new ObjectMapper();
-
         Flux<Customer> customerFlux = customerRepository.findWithTailableCursorBy();
 
         Publisher<WebSocketMessage> publisher = customerFlux.map(customer -> {
