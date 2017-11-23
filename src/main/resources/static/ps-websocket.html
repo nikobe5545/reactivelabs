@@ -28,7 +28,7 @@
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         if (!("WebSocket" in window)) WebSocket = MozWebSocket;
-        const socket = new WebSocket("ws://localhost:8080/stream/addNewCustomer");
+        const socket = new WebSocket("ws://localhost:8080/stream/customerAdded");
 
         socket.onopen = function (event) {
 
