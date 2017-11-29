@@ -7,7 +7,8 @@ To do this a capped collection is created in order to make it tailable.
 To try out the websocket:
 1. Set up MongoDB as described below
 2. Run the application
-3. Open http://localhost:8080/websocket.html
+3. Open http://localhost:8080/mongo-websocket.html
+4. Open http://localhost:8080/ps-websocket.html
 4. POST a new customer to http://localhost:8080/rest/customer
 ```javascript
 {
